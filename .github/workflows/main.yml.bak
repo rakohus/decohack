@@ -16,11 +16,9 @@ jobs:
           java-version: '8'
           java-package: jre
           architecture: x64
-          
       - name: Compile DEH File
         shell: cmd
         run: call build.bat
-        
       - name: Upload final DEH file
         uses: actions/upload-artifact@v2
         with:
