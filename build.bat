@@ -1,0 +1,1 @@
+bin\decohack.cmd input.dh --output dehacked.deh

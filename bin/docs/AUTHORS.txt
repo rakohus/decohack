@@ -1,0 +1,5 @@
+Matt Tropiano <mtropiano@gmail.com>
+	- All utility design.
+Xaser Acheron 
+	- DECOHack fixes/additions.
+	- WTexScan fixes/additions.

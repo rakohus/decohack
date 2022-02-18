@@ -1,0 +1,402 @@
+Frame/State Hardcodings in Doom/Boom
+====================================
+
+Frame 0:
+	NULL State. Reserved.
+	Any object that jumps to this frame is removed.
+
+Frame 1:
+	STOP State for weapons that reset player light level boost. 
+	Reserved for convenience.
+
+Frame 52:
+	Chaingun first firing state.
+
+Chaingun Muzzle Flash:
+	The chaingun's muzzle flash is [FlashFrame] and [FlashFrame]+1 on 
+	subsequent calls to A_FireCGun, offset from State 52. So, if called from 
+	state 52, [FlashFrame]. If state 53, [FlashFrame]+1.
+
+Frame 67:
+	If A_WeaponReady is called on this frame while the chainsaw is the active
+	weapon, the chainsaw sound is played.
+
+Frame 91:
+	Blood map object is set to this frame for a bleeding hitscan attack that 
+	does between 9 to 12 damage, inclusive.
+
+Frame 92:
+	Blood map object is set to this frame for a bleeding hitscan attack that 
+	does strictly less than 9 damage.
+
+Frame 154:
+	The player's firing frame on weapon fire.
+
+Frame 155:
+	The player's firing frame if a call to A_GunFlash happens directly, or 
+	indirectly via some weapon action functions.
+
+Frame 266:
+	An actor that calls A_VileChase and encounters a dead object with a Raise 
+	frame jumps to this frame on "heal".
+
+Frames 477-487 (inclusive):
+	On Fast Monsters, these frames get their duration halved.
+
+Frame 799:
+	For A_BrainExplode, a Rocket Projectile (Slot 34) is spawned, but 
+	immediately set to frame 799. It would be wise to then call A_BrainExplode
+	at the end to make the next explosion occur at the end of the animation.
+
+Frame 895:
+	All actors are set to this state when their corpse is crushed.
+
+Plasma Muzzle Flash:
+	The plasma rifle's muzzle flash is called at random between [FlashFrame] 
+	and [FlashFrame]+1 on a call to A_FirePlasma.
+
+Final Frame:
+	If replaced in a DEH patch, using DeHackEd to patch an original EXE will 
+	overwrite the weapon table, due to a bug in DeHackEd 3.0 (this is fine 
+	in source ports).
+
+
+More State Stuff
+================
+
+The [SpawnState] state on every thing is SET instead of updated via Thinker
+update, which means that it's action pointer will not be called. The state
+will also NOT ADVANCE if the duration of the that frame is 0 or less.
+
+
+Thing Slot Hardcoding
+=====================
+
+Player (Slot 1)
+	Player avatar itself. Created many times.
+
+Trooper (Slot 2)
+	On Death, creates an Ammo Clip (Slot 64) with a DROPPED flag.
+
+Sergeant (Slot 3)
+	On Death, creates a Shotgun (Slot 78) with a DROPPED flag. 
+
+Arch-Vile (Slot 4)
+	Has a shortened missile attack range (2048 units).
+	Is ignored by other monsters for infighting (others will not fight it).
+	Spawnable by A_SpawnFly (Probability: 0.8%).
+
+Arch-Vile Fire (Slot 5)
+	Spawned by A_VileTarget.
+
+Revenant (Slot 6) 
+	Has a longer melee range check.
+	Has an increased chance to do a missile attack at longer ranges.
+	Spawnable by A_SpawnFly (Probability: 3.9%).
+
+Revenant Rocket (Slot 7) 
+	Spawned by A_SkelMissile.
+	Only slot that can use A_Tracer, since A_SkelMissile sets tracer 
+	parameters.
+
+Revenant Rocket Trail (Slot 8)
+ 	Spawned on a seeking A_Tracer call.
+
+Mancubus (Slot 9)
+	Spawnable by A_SpawnFly (Probability: 11.7%).
+	When this calls A_BossDeath:
+		On MAP07, Floor_LowerToLowest all sectors tagged 666. 
+
+Mancubus Fireball (Slot 10)
+	Spawned by A_FatAttack1, A_FatAttack2, and A_FatAttack3, in different 
+	angles:
+		A_FatAttack1 - Center and target's right.
+		A_FatAttack2 - Center and target's left.
+		A_FatAttack3 - Akimbo left and right, shallower offset angles than 1 
+		               and 2.
+
+Chaingun Sergeant (Slot 11)
+	On Death, creates a Chaingun (Slot 74) with a DROPPED flag. 
+
+Imp (Slot 12)
+	Spawnable by A_SpawnFly (Probability: 19.5%).
+
+Demon (Slot 13)
+	Spawnable by A_SpawnFly (Probability: 15.6%).
+
+Spectre (Slot 14)
+	Spawnable by A_SpawnFly (Probability: 11.7%).
+
+Cacodemon (Slot 15)
+	Spawnable by A_SpawnFly (Probability: 11.7%).
+
+Baron (Slot 16) 
+	Shares a "species" with Hell Knights (Slot 18) to prevent infighting.
+	Spawnable by A_SpawnFly (Probability: 3.9%).
+	When this calls A_BossDeath:
+		On E1M8, Floor_LowerToLowest all sectors tagged 666. 
+
+Baron Fireball (Slot 17) 
+	Spawned by A_BruisAttack.
+
+Hell Knight (Slot 18)
+	Shares a "species" with Barons (Slot 16) to prevent infighting.
+	Spawnable by A_SpawnFly (Probability: 9.4%).
+
+Lost Soul (Slot 19)
+	Doubled missile attack chance.
+	Spawned by A_PainAttack (one, already flying) and A_PainDie (three, also flying).
+
+Spider Mastermind (Slot 20)
+	Sight and Death sounds are played at full volume always.
+	Immune to radius damage.
+	Has an increased chance to do a missile attack at longer ranges.
+	When this calls A_BossDeath:
+		On E3M8, end the map.
+		On E4M8, Floor_LowerToLowest all sectors tagged 666. 
+
+Arachnotron (Slot 21)
+	Spawnable by A_SpawnFly (Probability: 7.8%).
+	When this calls A_BossDeath:
+		On MAP07, Raise all sectors tagged 667 by the height of their 
+		linedefs' highest lower texture. 
+
+Cyberdemon (Slot 22)
+	Sight and Death sounds are played at full volume always.
+	Immune to radius damage.
+	Has an increased chance to do a missile attack at longer ranges.
+	When this calls A_BossDeath:
+		On E2M8, end the map.
+
+Pain Elemental (Slot 23)
+	Spawnable by A_SpawnFly (Probability: 3.9%).
+
+SS Nazi (Slot 24)
+	On Death, creates an Ammo Clip (Slot 64) with a DROPPED flag.
+
+Spawner Spot (Slot 28)
+	Must be present for A_BrainSpit or CRASH!
+
+Spawner Cube (Slot 29)
+	Spawned by A_BrainSpit.
+
+Spawner Fire (Slot 30)
+	Spawned by A_SpawnFly on monster spawn.
+
+Imp Fireball (Slot 32)
+	Spawned by A_TroopAttack, if in missile range.
+
+Caco Fireball (Slot 33)
+	Spawned by A_HeadAttack, if in missile range.
+
+Rocket Projectile (Slot 34)
+	Spawned by A_FireMissile and A_CyberAttack.
+	Also spawned by A_BrainScream and A_BrainExplode, with a slight adjustment
+	to starting frame.
+
+Plasma Gun Projectile (Slot 35)
+	Spawned by A_FirePlasma.
+
+BFG Projectile (Slot 36)
+	Spawned by A_FireBFG.
+
+Arachnotron Projectile (Slot 37)
+	Spawned by A_BspiAttack.
+
+Bullet Puff (Slot 38)
+	Spawned on hitscan attacks that don't spawn Blood (Slot 39).
+	Spawned on a seeking A_Tracer call (yes, really).
+	
+Blood (Slot 39) 
+	Spawned on hitscan attacks and other damaging things.
+
+Teleport Fog (Slot 40)
+	Spawned by object teleporting.
+
+Item Spawn Fog (Slot 41) 
+	Spawned when an item respawns in multiplayer.
+
+Teleport Destination (Slot 42) 
+	Used as spot to teleport on Teleport Special.
+
+BFG Tracer (Slot 43) 
+	Spawned by tracer hitscans from A_BFGSpray.
+
+Teleport Exit (Slot 44) 
+	Teleporter exit special spot.
+
+Ammo Clip (Slot 64)
+	Created on Trooper's (Slot 2) death with a DROPPED flag. 
+	Created on SS Nazi's (Slot 24) death with a DROPPED flag. 
+
+Chaingun (Slot 74)
+	Created on Chaingun Sergeant's (Slot 11) death with a DROPPED flag. 
+
+Shotgun (Slot 78)
+	Created on Sergeant's (Slot 3) death with a DROPPED flag. 
+
+
+Strings
+=======
+
+---Doom 1.9
+
+String table entries 132 to 140 (inclusive) are intermission texts.
+
+132 - After E1M8
+133 - After E2M8
+134 - After E3M8
+135 - After MAP06
+136 - After MAP11
+137 - After MAP20
+138 - After MAP30
+139 - After MAP15 (Secret)
+140 - After MAP31 (Secret)
+
+String table entries 141 to 149 (inclusive) are background flats for
+intermissions.
+
+141 - After MAP06
+142 - After MAP11
+143 - After MAP20
+144 - After MAP30
+145 - After MAP15 (Secret)
+146 - After MAP31 (Secret)
+147 - After E1M8
+148 - After E2M8
+149 - After E3M8
+
+String table entries 649 to 675 (inclusive) are level names for E1M1 to E3M9.
+
+String table entries 677 to 708 (inclusive) are level names for MAP01 to MAP32.
+
+String table entries 760 to 791 (inclusive) are music names for Doom 1.
+Some are reused for E4 maps. 
+
+String table entries 792 to 826 (inclusive) are music names for Doom 2.
+MAP31's music is reused for roll call. 
+
+String table entries 827 to 934 (inclusive) are sound names. 
+The relevant string on sound indices is [index] + 827.
+
+String table entries 939 to 1076 (inclusive) are sprite names. 
+The relevant string on sprite index is [index] + 939.
+
+
+---Ultimate Doom 1.9
+
+String table entries 132 to 141 (inclusive) are intermission texts.
+
+132 - After E1M8
+133 - After E2M8
+134 - After E3M8
+135 - After E4M8
+136 - After MAP06
+137 - After MAP11
+138 - After MAP20
+139 - After MAP30
+140 - After MAP15 (Secret)
+141 - After MAP31 (Secret)
+
+String table entries 142 to 151 (inclusive) are background flats for
+intermissions.
+
+142 - After MAP06
+143 - After MAP11
+144 - After MAP20
+145 - After MAP30
+146 - After MAP15 (Secret)
+147 - After MAP31 (Secret)
+148 - After E1M8
+149 - After E2M8
+150 - After E3M8
+151 - After E4M8
+
+String table entries 655 to 690 (inclusive) are level names for E1M1 to E4M9.
+
+String table entries 692 to 723 (inclusive) are level names for MAP01 to MAP32.
+
+String table entries 775 to 806 (inclusive) are music names for Doom 1.
+Some are reused for E4 maps. 
+
+String table entries 807 to 841 (inclusive) are music names for Doom 2.
+MAP31's music is reused for roll call. 
+
+String table entries 842 to 949 (inclusive) are sound names. 
+The relevant string on sound indices is [index] + 842.
+
+String table entries 954 to 1091 (inclusive) are sprite names. 
+The relevant string on sprite index is [index] + 954.
+
+
+Items
+=====
+
+Item Pickups are performed when the player collides with an object that is 
+flagged as "pickup," but the sprite's names dictate what is given (refer to 
+actual string data at the index for the detected name):
+
+Sprite Index 55 -> Green Armor 
+Sprite Index 56 -> Blue Armor 
+Sprite Index 60 -> Health Bonus 
+Sprite Index 61 -> Armor Bonus 
+Sprite Index 62 -> Blue Keycard 
+Sprite Index 63 -> Red Keycard 
+Sprite Index 64 -> Yellow Keycard 
+Sprite Index 65 -> Blue Skull 
+Sprite Index 66 -> Red Skull 
+Sprite Index 67 -> Yellow Skull 
+Sprite Index 68 -> Stimpak 
+Sprite Index 69 -> Medikit 
+Sprite Index 70 -> Soulsphere 
+Sprite Index 71 -> Invulnerability 
+Sprite Index 72 -> Berserk 
+Sprite Index 73 -> Partial Invisibility 
+Sprite Index 74 -> Megasphere 
+Sprite Index 75 -> RadSuit 
+Sprite Index 76 -> Computer Map 
+Sprite Index 77 -> Lite Amp 
+Sprite Index 78 -> Ammo Clip 
+Sprite Index 79 -> Ammo Box 
+Sprite Index 80 -> Rocket 
+Sprite Index 81 -> Rocket Box 
+Sprite Index 82 -> Cells 
+Sprite Index 83 -> Bulk Cell 
+Sprite Index 84 -> Shells 
+Sprite Index 85 -> Shell Box 
+Sprite Index 86 -> Backpack 
+Sprite Index 87 -> BFG9000 
+Sprite Index 88 -> Chaingun 
+Sprite Index 89 -> Chainsaw 
+Sprite Index 90 -> Rocket Launcher 
+Sprite Index 91 -> Plasma Rifle 
+Sprite Index 92 -> Shotgun 
+Sprite Index 93 -> Super Shotgun 
+
+
+On Crush
+========
+
+All objects with the DEAD flag jump to Frame 895 when crushed by a lowering 
+ceiling, and get SOLID removed from them.
+
+
+Other Reference
+===============
+
+Actions that play specific Weapon Sounds (played on owning actor):
+	A_OpenShotgun2 (Sound 5 DBOPN)
+	A_LoadShotgun2 (Sound 7 DBLOAD)
+	A_BFGsound (Sound 9 BFG)
+	A_CloseShotgun2 (Sound 6 DBCLS) (also calls A_ReFire)
+
+Actions that play Specific Monster Sounds (played on calling actor):
+	A_VileStart (Sound 54 VILATK)
+	A_FatRaise (Sound 99 MANATK) (also calls A_FaceTarget)
+	A_SkelWhoosh (Sound 56 SKESWG) (also calls A_FaceTarget)
+	A_StartFire (Sound 92 FLAMST) (also calls A_Fire)
+	A_FireCrackle (Sound 91 FLAME) (also calls A_Fire)
+
+Actions that play Specific Monster Sounds (played at full volume):
+	A_BrainPain (Sound 97 BOSPN)
+
