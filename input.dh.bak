@@ -333,7 +333,6 @@ thing MT_EXTRA00 "Aracnorb Queen"
     damage 0
     reactiontime 8
     painchance 45
-	meleerange 64
     mass 2000
 
     clear flags
@@ -353,113 +352,113 @@ thing MT_EXTRA00 "Aracnorb Queen"
     clear states
     states
     {
-	Spawn:
-		SP07 A 1 A_Look
-		Loop
-	See:
-		SP07 A 2 A_Chase
-		Loop
-	Melee:
-		SP07 ABC 5
-		SP07 D 6 A_MonsterMeleeAttack
-		Goto See
-	Missile:
-		TNT1 A 0 A_Jump(96, "BFG")
-		TNT1 A 0 A_JumpIfCloser(512, "CloseRange")
-		Goto LongRange
-	CloseRange:
-		TNT1 A 0 A_Jump(176, "RapidFire")
-		Goto SpreadFire
-	LongRange:
-		TNT1 A 0 A_Jump(176, "SpreadFire")
-		Goto RapidFire
-	BFG:
-		TNT1 A 0 A_PlaySound("queen/fire")
-		SP07 BCD 8 A_FaceTarget
-		SP07 E 10 Bright A_CustomMissile("QueenBFG",50,-10,0)
-		Goto See
-	RapidFire:
-		SP07 BCD 8 A_FaceTarget
-		SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 D 0 BRIGHT A_FaceTarget
-		SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 D 0 BRIGHT A_FaceTarget
-		SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 D 0 BRIGHT A_FaceTarget
-		SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 P 0 BRIGHT A_FaceTarget
-		SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 D 0 BRIGHT A_FaceTarget
-		SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 D 0 BRIGHT A_FaceTarget
-		SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 D 0 BRIGHT A_FaceTarget
-		SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 D 0 BRIGHT A_FaceTarget
-		SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 D 0 BRIGHT A_FaceTarget
-		SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 D 0 BRIGHT A_FaceTarget
-		SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 D 5 A_FaceTarget
-		//SP07 D 5
-		Goto See
-	SpreadFire:
-		SP07 BCD 8 A_FaceTarget
-		TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
-		TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
-		TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
-		TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
-		TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
-		SP07 E 5 Bright A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 BCD 8 A_FaceTarget
-		TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
-		TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
-		TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
-		TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
-		TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
-		SP07 E 5 Bright A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-4,4))
-		SP07 D 5 A_FaceTarget
-		Goto See
-	Pain:
-		TNT1 A 0 A_Jump(50, "PainSpam")
-		SP07 F 4
-		SP07 F 4 A_Pain
-		Goto See
-	PainSpam:
-		SP07 F 4
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,5,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,25,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,45,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,65,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,85,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,105,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,125,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,145,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,165,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,185,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,205,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,225,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,245,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,265,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,285,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,305,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,325,32,0)
-		SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,345,32,0)
-		SP07 F 4 A_Pain
-		Goto See
-	Death:
-		SP07 G 0 A_ChangeFlag("FLOATBOB",0)
-		SP07 G 9 A_Scream
-		SP07 G 3 A_Fall
-		Wait
-	Crash:
-		SP07 HIJKL 9
-		SP07 M -1
-		Stop
-	/*Raise:
-		SP07 MLKJIHGA 8
-		SP07 A 0 A_ChangeFlag("FLOATBOB",1)
-		Goto See*/
+  Spawn:
+    SP07 A 1 A_Look
+    Loop
+  See:
+    SP07 A 2 A_Chase
+    Loop
+  Melee:
+    SP07 ABC 5
+    SP07 D 6 A_MeleeAttack
+    Goto See
+  Missile:
+	TNT1 A 0 A_Jump(96, "BFG")
+	TNT1 A 0 A_JumpIfCloser(512, "CloseRange")
+	Goto LongRange
+  CloseRange:
+    TNT1 A 0 A_Jump(176, "RapidFire")
+	Goto SpreadFire
+  LongRange:
+    TNT1 A 0 A_Jump(176, "SpreadFire")
+	Goto RapidFire
+  BFG:
+    TNT1 A 0 A_PlaySound("queen/fire")
+	SP07 BCD 8 A_FaceTarget
+    SP07 E 10 Bright A_CustomMissile("QueenBFG",50,-10,0)
+	Goto See
+  RapidFire:
+    SP07 BCD 8 A_FaceTarget
+    SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
+    SP07 D 0 BRIGHT A_FaceTarget
+    SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
+    SP07 D 0 BRIGHT A_FaceTarget
+    SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
+    SP07 D 0 BRIGHT A_FaceTarget
+    SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
+    SP07 P 0 BRIGHT A_FaceTarget
+    SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
+    SP07 D 0 BRIGHT A_FaceTarget
+    SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
+    SP07 D 0 BRIGHT A_FaceTarget
+    SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
+    SP07 D 0 BRIGHT A_FaceTarget
+    SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
+    SP07 D 0 BRIGHT A_FaceTarget
+    SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
+    SP07 D 0 BRIGHT A_FaceTarget
+    SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
+    SP07 D 0 BRIGHT A_FaceTarget
+    SP07 E 5 BRIGHT A_CustomMissile ("QueenPlasmaBlast", 40, 0, random(-4,4))
+    SP07 D 5 A_FaceTarget
+    //SP07 D 5
+	Goto See
+  SpreadFire:
+    SP07 BCD 8 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
+	TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
+	TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
+	TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
+	TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
+	SP07 E 5 Bright A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-4,4))
+	SP07 BCD 8 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
+	TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
+	TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
+	TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
+	TNT1 A 0 A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-7,7), CMF_AIMOFFSET|CMF_OFFSETPITCH, random(-3,3))
+	SP07 E 5 Bright A_CustomMissile("QueenPlasmaBlast", 40, 0, random(-4,4))
+	SP07 D 5 A_FaceTarget
+	Goto See
+  Pain:
+	TNT1 A 0 A_Jump(50, "PainSpam")
+    SP07 F 4
+	SP07 F 4 A_Pain
+    Goto See
+  PainSpam:
+    SP07 F 4
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,5,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,25,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,45,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,65,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,85,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,105,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,125,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,145,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,165,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,185,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,205,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,225,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,245,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,265,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,285,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,305,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,325,32,0)
+    SP07 F 0 A_custommissile("QueenPainPlasmaBlast",75,0,345,32,0)
+	SP07 F 4 A_Pain
+    Goto See
+  Death:
+    SP07 G 0 A_ChangeFlag("FLOATBOB",0)
+    SP07 G 9 A_Scream
+	SP07 G 3 A_Fall
+    Wait
+  Crash:
+    SP07 HIJKL 9
+    SP07 M -1
+    Stop
+  /*Raise:
+    SP07 MLKJIHGA 8
+    SP07 A 0 A_ChangeFlag("FLOATBOB",1)
+	Goto See*/
   }
 }

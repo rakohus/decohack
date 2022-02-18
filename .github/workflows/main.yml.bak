@@ -16,12 +16,14 @@ jobs:
           java-version: '8'
           java-package: jre
           architecture: x64
+          
       - name: Compile DEH File
         shell: cmd
         run: call build.bat
-      - name: Upload final DEH file
+        
+      - name: Upload final DEH file zipped
         uses: actions/upload-artifact@v2
         with:
-          name: main
+          name: dehacked
           path: |
             dehacked.deh

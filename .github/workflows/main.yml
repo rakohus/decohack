@@ -21,9 +21,9 @@ jobs:
         shell: cmd
         run: call build.bat
         
-      - name: Upload final DEH file
+      - name: Upload final DEH file zipped
         uses: actions/upload-artifact@v2
         with:
-          name: main
+          name: dehacked
           path: |
             dehacked.deh
