@@ -360,9 +360,9 @@ thing MT_EXTRA07 "Giant Imp"
 		goto see
     Missile:
         SP07 EF 8 A_FaceTarget
-        SP07 G 6 BRIGHT A_MonsterProjectile(FatShot, 0, 0, 0, -30.0)
+        SP07 G 6 BRIGHT A_MonsterProjectile(10, 0, 0, 0, -30.0)
         SP07 EF 6 A_FaceTarget
-        SP07 G 6 BRIGHT A_MonsterProjectile(FatShot, 0, 0, 0, -30.0)
+        SP07 G 6 BRIGHT A_MonsterProjectile(10, 0, 0, 0, -30.0)
         goto see
     Pain:
         SP07 H 10 A_Pain
