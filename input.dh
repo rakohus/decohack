@@ -331,9 +331,9 @@ thing MT_EXTRA07 "Giant Imp"
     height 112
     damage 96
     reactiontime 8
-    painchance 400
+    painchance 20
     mass 800
-	meleerange 32
+	meleerange 64
 
     clear flags
     +SOLID
@@ -365,16 +365,23 @@ thing MT_EXTRA07 "Giant Imp"
         SP07 G 6 BRIGHT A_MonsterProjectile(10, 0, 0, 0, -30)
         goto see
     Pain:
-        SP07 G 10 A_Pain
+        SP07 H 10 A_Pain
         goto see
     Death:
-        SP07 H 10
-        SP07 I 10 A_Scream
-        SP07 JKL 10
-        SP07 M 10 A_Fall
-        SP07 NO 10
-        SP07 P 30 A_Mushroom
-        SP07 P -1 A_BossDeath
+        SP07 H 5 A_Mushroom
+        SP07 I 5 A_Scream
+		SP07 J 8
+		SP07 K 6
+        SP07 L 6 A_NoBlocking
+        SP07 M -1
+		stop
+	XDeath:
+        SP07 N 5 A_Mushroom
+		SP07 O 5 A_XScream
+		SP07 P 5 A_Mushroom
+		SP07 Q 5 A_NoBlocking
+        SP07 RST 5
+        SP07 U -1
         stop
     }
 }

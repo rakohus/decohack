@@ -331,9 +331,9 @@ thing MT_EXTRA07 "Giant Imp"
     height 112
     damage 96
     reactiontime 8
-    painchance 400
+    painchance 20
     mass 800
-	meleerange 32
+	meleerange 64
 
     clear flags
     +SOLID
@@ -341,7 +341,7 @@ thing MT_EXTRA07 "Giant Imp"
     +COUNTKILL
 	
 //	clear sounds
-    seesound "BGSIT1","BGSIT2"
+    seesound "BGSIT1"
     painsound "POPAIN"
   	deathsound "BGDTH1"
   	activesound "BGACT"
@@ -365,7 +365,7 @@ thing MT_EXTRA07 "Giant Imp"
         SP07 G 6 BRIGHT A_MonsterProjectile(10, 0, 0, 0, -30)
         goto see
     Pain:
-        SP07 G 10 A_Pain
+        SP07 H 10 A_Pain
         goto see
     Death:
         SP07 H 10
