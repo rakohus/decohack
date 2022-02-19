@@ -341,7 +341,7 @@ thing MT_EXTRA07 "Giant Imp"
     +COUNTKILL
 	
 	clear sounds
-    seesound "BGSIT"
+    seesound "bgsit"
     painsound "POPAIN"
 	deathsound "BGDTH"
 	activesound "BGACT"
