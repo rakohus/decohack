@@ -340,11 +340,11 @@ thing MT_EXTRA07 "Giant Imp"
     +SHOOTABLE
     +COUNTKILL
 	
-	clear sounds
-    seesound "bgsit"
-    painsound "POPAIN"
-	deathsound "BGDTH"
-	activesound "BGACT"
+//	clear sounds
+//  seesound "BGSIT"
+//  painsound "POPAIN"
+//	deathsound "BGDTH"
+//	activesound "BGACT"
 
     states
     {
