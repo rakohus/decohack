@@ -355,11 +355,14 @@ thing MT_EXTRA07 "Giant Imp"
         SP07 AABBCCDD 3 A_Chase
         loop
 	Melee:
+		SP07 E 8
+		SP08 F 6 A_MonsterMeleeAttack(50, 0, sound "claw")
+		goto see
     Missile:
         SP07 EF 8 A_FaceTarget
-        SP07 G 6 A_MonsterProjectile
-        SP07 E 12 A_FaceTarget
-        SP07 G 6 A_MonsterProjectile
+        SP07 G 6 A_MonsterProjectile(10, 0, 0, 0, -30)
+        SP07 EF 6 A_FaceTarget
+        SP07 G 6 A_MonsterProjectile(10, 0, 0, 0, -30)
         goto see
     Pain:
         SP07 G 10 A_Pain
