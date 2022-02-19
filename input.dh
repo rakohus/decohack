@@ -372,14 +372,14 @@ thing MT_EXTRA07 "Giant Imp"
         SP07 I 5 A_Scream
 		SP07 J 8
 		SP07 K 6
-        SP07 L 6 A_NoBlocking
+        SP07 L 6
         SP07 M -1
 		stop
 	XDeath:
         SP07 N 5 A_Mushroom
 		SP07 O 5 A_XScream
 		SP07 P 5 A_Mushroom
-		SP07 Q 5 A_NoBlocking
+		SP07 Q 5
         SP07 RST 5
         SP07 U -1
         stop
