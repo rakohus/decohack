@@ -331,9 +331,9 @@ thing MT_EXTRA07 "Giant Imp"
     height 112
     damage 96
     reactiontime 8
-    painchance 20
+    painchance 15
     mass 800
-	meleerange 64
+	meleerange 80
 
     clear flags
     +SOLID
@@ -355,14 +355,14 @@ thing MT_EXTRA07 "Giant Imp"
         SP07 AABBCCDD 3 A_Chase
         loop
 	Melee:
-		SP07 E 8
-		SP08 F 6 A_MonsterMeleeAttack(50, 0, sound "claw")
+		SP07 E 2
+		SP08 F 8 A_MonsterMeleeAttack(50, 0, sound "claw")
 		goto see
     Missile:
         SP07 EF 8 A_FaceTarget
-        SP07 G 6 BRIGHT A_MonsterProjectile(10, 0, 0, 0, -30.0)
+        SP07 G 6 BRIGHT A_MonsterProjectile(thing FatShot, 0, 0, 0, 0.0)
         SP07 EF 6 A_FaceTarget
-        SP07 G 6 BRIGHT A_MonsterProjectile(10, 0, 0, 0, -30.0)
+        SP07 G 6 BRIGHT A_MonsterProjectile(thing FatShot, 0, 0, 0, 0.0)
         goto see
     Pain:
         SP07 H 10 A_Pain
