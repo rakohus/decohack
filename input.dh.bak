@@ -322,7 +322,7 @@ thing MT_EXTRA07 "Crop 2"
     }
 }
 
-thing MT_EXTRA07 : thing "Giant Imp"
+thing MT_EXTRA07 : "Giant Imp"
 {
     ednum 95
     health 600
